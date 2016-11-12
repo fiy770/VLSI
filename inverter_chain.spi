@@ -1,0 +1,55 @@
+************************************************************************
+* auCdl Netlist:
+* 
+* Library Name:  VLSI
+* Top Cell Name: inverter_chain
+* View Name:     schematic
+* Netlisted on:  Oct 20 13:44:52 2016
+************************************************************************
+
+*.BIPOLAR
+*.RESI = 2000 
+*.RESVAL
+*.CAPVAL	
+*.DIOPERI
+*.DIOAREA
+*.EQUATION
+*.SCALE METER
+*.MEGA
+*.PARAM
+
+
+
+************************************************************************
+* Library Name: VLSI
+* Cell Name:    inverter
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT inverter vss vdd vin vout
+*.PININFO gnd:I vdd:I vin:I vout:O
+MM9 vout4 vin vdd vdd p_18 W=2u L=1.2u m=1 
+MM8 vout4 vin vss vss n_18 W=0.25u L=1.2u m=1  
+MM11 vout5 vout4 vdd vdd p_18 W=3.15u L=0.8u m=1 
+MM10 vout5 vout4 vss vss n_18 W=0.5u L=0.8u m=1  
+MM1 vout1 vout5 vdd vdd p_18 W=5u L=0.4u m=1 $8.3u 9.8u 7.1u 5.8u
+MM0 vout1 vout5 vss vss n_18 W=1u L=0.4u m=1  $3u  3.5u 2.5u 2u
+MM3 vout2 vout1 vdd vdd p_18 W=9.75u L=0.4u m=1 
+MM2 vout2 vout1 vss vss n_18 W=2u L=0.4u m=1  
+MM5 vout3 vout2 vdd vdd p_18 W=19.5u L=0.4u m=1 
+MM4 vout3 vout2 vss vss n_18 W=4u L=0.4u m=1  
+MM7 vout vout3 vdd vdd p_18 W=21.1u L=0.18u m=1 
+MM6 vout vout3 vss vss n_18 W=8u L=0.18u m=1  
+.ENDS
+
+************************************************************************
+* Library Name: VLSI
+* Cell Name:    inverter_chain
+* View Name:    schematic
+************************************************************************
+
+.SUBCKT inverter_chain vdd vin vout vss
+*.PININFO vdd:I vin:I vss:I vout:O
+XI2 vss vdd vin vout / inverter
+.ENDS
+
